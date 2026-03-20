@@ -1,4 +1,0 @@
-model,n_estimators,max_depth,learning_rate
-Random Forest,200,-,-
-XGBoost,200,4,0.05
-CatBoost,200,4,0.05
