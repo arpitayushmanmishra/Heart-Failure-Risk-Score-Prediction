@@ -27,21 +27,33 @@ function oneHotEncode(input) {
 }
 
 router.post("/", (req, res) => {
+  console.log("HRS endpoint hit!", req.body);
   const encoded = oneHotEncode(req.body);
 
-  let score = 0;
-  for (const feature of config.features) {
-    const min = config.scaler_min[feature];
-    const max = config.scaler_max[feature];
-    const scaled = (encoded[feature] - min) / (max - min);
-    score += scaled * config.hrs_weights[feature];
-  }
+  const contributions = {};
+let score = 0;
+
+for (const feature of config.features) {
+  const min = config.scaler_min[feature];
+  const max = config.scaler_max[feature];
+  const scaled = (encoded[feature] - min) / (max - min);
+  const contribution = scaled * config.hrs_weights[feature];
+  contributions[feature] = parseFloat(contribution.toFixed(4));
+  score += contribution;
+}
 
   const risk =
     score < config.thresholds.low ? "Low" :
     score < config.thresholds.high ? "Moderate" : "High";
 
-  res.json({ hrs_score: parseFloat(score.toFixed(4)), risk });
+  const actionableFeatures = ['trestbps', 'oldpeak', 'thalch', 'chol', 'ca'];
+
+  const topFeatures = Object.entries(contributions)
+  .filter(([feature]) => actionableFeatures.includes(feature))
+  .sort((a, b) => b[1] - a[1])
+  .map(([feature, value]) => ({ feature, value }));
+
+  res.json({ hrs_score: parseFloat(score.toFixed(4)), risk, contributions, top_features: topFeatures });
 });
 
 export default router;

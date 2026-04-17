@@ -1,7 +1,9 @@
 const labels = {
+  trestbps: "Blood Pressure",
   oldpeak: "ST Depression",
-  bp: "Blood Pressure",
-  chol: "Cholesterol"
+  thalch: "Maximum Heart Rate",
+  chol: "Cholestrol",
+  ca: "Number of Major Vessels"
 };
 
 function SHAPInsights({ features }) {
@@ -11,7 +13,7 @@ function SHAPInsights({ features }) {
 
       {features.map((f, i) => (
         <p key={i}>
-          {labels[f.feature] || f.feature} is contributing significantly
+          <strong>{labels[f.feature] || f.feature}</strong> is contributing significantly (score: {f.value})
         </p>
       ))}
     </div>

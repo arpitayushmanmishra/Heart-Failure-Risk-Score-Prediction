@@ -11,10 +11,11 @@ function Predictor() {
   const analyzePatient = async (data) => {
   try {
     const res = await axios.post("http://localhost:5000/api/hrs", data);
+    console.log(res.data);
     setResult({
       risk_score: res.data.hrs_score,
       risk_level: res.data.risk,
-      top_features: [],
+      top_features: res.data.top_features,
       counterfactuals: []
     });
   } catch (err) {

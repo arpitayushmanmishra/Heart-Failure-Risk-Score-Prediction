@@ -1,7 +1,7 @@
 function ResultCard({ data }) {
   const color =
     data.risk_level === "High" ? "red" :
-    data.risk_level === "Medium" ? "orange" : "green";
+    data.risk_level === "Moderate" ? "orange" : "green";
 
   return (
     <div style={{
