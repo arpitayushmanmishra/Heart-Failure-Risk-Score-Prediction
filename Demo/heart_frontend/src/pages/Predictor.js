@@ -11,7 +11,7 @@ function Predictor() {
   const analyzePatient = async (data) => {
     try {
       // ✅ ONLY call Express
-      const res = await axios.post("http://localhost:5000/analyze", data);
+      const res = await axios.post("https://heart-failure-risk-score-prediction-1.onrender.com", data);
 
       const response = res.data;
 
