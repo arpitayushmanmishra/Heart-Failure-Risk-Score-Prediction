@@ -74,12 +74,12 @@ function InputForm({ onSubmit }) {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {/* 🔢 Number Inputs */}
-      <Input label="Age (years)" name="age" min="20" max="100" onChange={handleChange} />
-      <Input label="Resting BP (mm Hg)" name="trestbps" min="80" max="200" onChange={handleChange} />
-      <Input label="Cholesterol (mg/dL)" name="chol" min="100" max="600" onChange={handleChange} />
-      <Input label="Max Heart Rate" name="thalach" min="60" max="220" onChange={handleChange} />
-      <Input label="Oldpeak" name="oldpeak" min="0" max="6" step="0.1" onChange={handleChange} />
-      <Input label="Major Vessels (0–3)" name="ca" min="0" max="3" step="1" onChange={handleChange} />
+      <Input label="Age (years)" name="age" min="20" max="100" onChange={handleChange} placeholder="Eg: 42"/>
+      <Input label="Resting BP (mm Hg)" name="trestbps" min="80" max="200" onChange={handleChange} placeholder="Eg: 140"/>
+      <Input label="Cholesterol (mg/dL)" name="chol" min="100" max="600" onChange={handleChange} placeholder="Eg: 250" />
+      <Input label="Max Heart Rate" name="thalach" min="60" max="220" onChange={handleChange} placeholder="Eg: 140"/>
+      <Input label="Oldpeak" name="oldpeak" min="0" max="6" step="0.1" onChange={handleChange} placeholder="Eg: 2.5"/>
+      <Input label="Major Vessels (0–3)" name="ca" min="0" max="3" step="1" onChange={handleChange} placeholder="Eg: 2"/>
 
       {/* 🔽 Dropdowns */}
       <Select label="Sex" name="sex" options={{ 1: "Male", 0: "Female" }} onChange={handleChange} />
@@ -123,7 +123,7 @@ function InputForm({ onSubmit }) {
 
 /* 🔹 Components */
 
-const Input = ({ label, name, onChange, min, max, step }) => (
+const Input = ({ label, name, onChange, min, max, step, placeholder }) => (
   <div style={fieldStyle}>
     <label>{label}</label>
     <input
@@ -134,6 +134,7 @@ const Input = ({ label, name, onChange, min, max, step }) => (
       step={step || "any"}
       required
       onChange={onChange}
+      placeholder={placeholder}
       onKeyDown={(e) => {
         if (["e", "E", "+", "-"].includes(e.key)) e.preventDefault();
       }}

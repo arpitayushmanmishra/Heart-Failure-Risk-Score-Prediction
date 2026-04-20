@@ -29,7 +29,7 @@ function Predictor() {
 
   return (
     <div>
-      <InputForm onSubmit={analyzePatient} />
+      <InputForm onSubmit={analyzePatient}/>
 
       {result && (
         <>
