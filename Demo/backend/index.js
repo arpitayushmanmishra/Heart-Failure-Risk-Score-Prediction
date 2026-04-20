@@ -26,7 +26,7 @@ app.post("/analyze", async (req, res) => {
     if (risk === "High") {
       try {
         const response = await axios.post(
-          "https://heart-failure-risk-score-prediction.onrender.com",
+          "https://heart-failure-risk-score-prediction.onrender.com/counterfactual",
           {
             ...input,
             risk,
